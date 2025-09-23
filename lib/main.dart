@@ -1,4 +1,4 @@
-import 'package:car_rent/screens/login_page.dart';
+import 'package:car_rent/screens/home_page.dart';
 import 'package:car_rent/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: const OnboardingPage(),
+      home: const HomePage(),
     );
   }
 }
