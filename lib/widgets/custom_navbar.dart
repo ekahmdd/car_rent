@@ -18,10 +18,10 @@ class CustomNavBar extends StatelessWidget {
         gradient: const LinearGradient(
           colors: [
             Color(0xFF3D3C6D), // Ungu lebih gelap
-            Color(0xFF413161), // Ungu terang
+            Color(0xFF484263), // Ungu terang
           ],
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
+          begin: Alignment.bottomCenter,
+          end: Alignment.topCenter,
         ),
         borderRadius: BorderRadius.circular(0),
       ),

@@ -1,5 +1,4 @@
 import 'package:car_rent/screens/home_page.dart';
-import 'package:car_rent/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
