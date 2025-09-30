@@ -3,8 +3,6 @@ import 'package:car_rent/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-
-
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
@@ -144,22 +142,8 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
 
-                const SizedBox(height: 8),
+                const SizedBox(height: 40),
 
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: TextButton(
-                    onPressed: () {},
-                    child: const Text(
-                      "Belum punya akun ?",
-                      style: TextStyle(color: Color(0xff6E667E)),
-                    ),
-                  ),
-                ),
-
-                const SizedBox(height: 24),
-
-                // Login Button Gradient
                 Center(
                   child: GestureDetector(
                     onTap: _login,
