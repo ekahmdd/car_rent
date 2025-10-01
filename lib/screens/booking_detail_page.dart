@@ -3,7 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class BookingDetailPage extends StatefulWidget {
-  const BookingDetailPage({super.key});
+  final String carName;
+  final String brand;
+  final String imagePath;
+  final String price;
+
+  const BookingDetailPage({
+    super.key,
+    required this.carName,
+    required this.brand,
+    required this.imagePath,
+    required this.price,
+  });
 
   @override
   State<BookingDetailPage> createState() => _BookingDetailPageState();
@@ -43,7 +54,7 @@ class _BookingDetailPageState extends State<BookingDetailPage> {
               surface: Color(0xFF1E1E2C),
               onSurface: Colors.white,
             ),
-            dialogBackgroundColor: const Color(0xFF2C2C3E),
+            dialogTheme: DialogThemeData(backgroundColor: Color(0xFF2C2C3E)),
           ),
           child: child!,
         );
@@ -213,6 +224,10 @@ class _BookingDetailPageState extends State<BookingDetailPage> {
                       startDate: startDate!,
                       endDate: endDate!,
                       paymentMethod: paymentMethod!,
+                      carName: widget.carName,
+                      brand: widget.brand,
+                      imagePath: widget.imagePath,
+                      price: widget.price,
                     ),
                   ),
                 );
@@ -234,7 +249,11 @@ class _BookingDetailPageState extends State<BookingDetailPage> {
               child: const Center(
                 child: Text(
                   "Konfirmasi",
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
                 ),
               ),
             ),

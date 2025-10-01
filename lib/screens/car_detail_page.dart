@@ -131,11 +131,17 @@ class DetailCarPage extends StatelessWidget {
                     onPressed: () {
                       
                         Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (_) => const BookingDetailPage(),
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => BookingDetailPage(
+                            carName: name,
+                            brand: brand,
+                            imagePath: assetPath,
+                            price: price,
                           ),
-                        );
+                        ),
+                      );
+
                       
                     },
                     child: Text(

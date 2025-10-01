@@ -2,7 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class SearchBarCustom extends StatelessWidget {
-  const SearchBarCustom({super.key});
+  final TextEditingController controller;
+  final ValueChanged<String> onChanged;
+
+  const SearchBarCustom({
+    super.key,
+    required this.controller,
+    required this.onChanged,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -13,17 +20,18 @@ class SearchBarCustom extends StatelessWidget {
         borderRadius: BorderRadius.circular(22),
       ),
       child: TextField(
+        controller: controller,
+        onChanged: onChanged,
         style: GoogleFonts.inter(
-          textStyle: Theme.of(context).textTheme.displayLarge,
           fontSize: 16,
           fontWeight: FontWeight.w200,
           color: Colors.white,
         ),
-        decoration: InputDecoration(
+        decoration: const InputDecoration(
           border: InputBorder.none,
-          hintText: "Pencarian",
+          hintText: "Pencarian berdasarkan merk",
           hintStyle: TextStyle(color: Colors.grey),
-          icon: Icon(Icons.search, color: Colors.grey, size: 28,),
+          icon: Icon(Icons.search, color: Colors.grey, size: 28),
         ),
       ),
     );

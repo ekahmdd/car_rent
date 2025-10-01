@@ -1,19 +1,19 @@
-class Booking {
+class BookingHistory {
   final String carName;
-  final String carBrand;
-  final String carImage;
+  final String brand;
+  final String imagePath;
   final DateTime startDate;
   final DateTime endDate;
   final String paymentMethod;
-  final int totalPrice;
 
-  Booking({
+  BookingHistory({
     required this.carName,
-    required this.carBrand,
-    required this.carImage,
+    required this.brand,
+    required this.imagePath,
     required this.startDate,
     required this.endDate,
     required this.paymentMethod,
-    required this.totalPrice,
   });
+
+  int get totalDays => endDate.difference(startDate).inDays;
 }

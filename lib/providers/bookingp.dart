@@ -1,14 +1,13 @@
 import 'package:car_rent/models/booking.dart';
-import 'package:flutter/material.dart';
 
 
-class BookingProvider extends ChangeNotifier {
-  final List<Booking> _bookings = [];
 
-  List<Booking> get bookings => _bookings;
+class BookingRepository {
+  static final List<BookingHistory> _histories = [];
 
-  void addBooking(Booking booking) {
-    _bookings.add(booking);
-    notifyListeners();
+  static List<BookingHistory> get histories => _histories;
+
+  static void addHistory(BookingHistory history) {
+    _histories.add(history);
   }
 }

@@ -1,3 +1,5 @@
+import 'package:car_rent/models/booking.dart';
+import 'package:car_rent/providers/bookingp.dart';
 import 'package:flutter/material.dart';
 
 class BookingSuccessPage extends StatelessWidget {
@@ -5,11 +7,20 @@ class BookingSuccessPage extends StatelessWidget {
   final DateTime endDate;
   final String paymentMethod;
 
+  final String carName;
+  final String brand;
+  final String imagePath;
+  final String price;
+
   const BookingSuccessPage({
     super.key,
     required this.startDate,
     required this.endDate,
     required this.paymentMethod,
+    required this.carName,
+    required this.brand,
+    required this.imagePath,
+    required this.price,
   });
 
   String _formatDate(DateTime date) {
@@ -38,20 +49,34 @@ class BookingSuccessPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFF0E0E15),
-      appBar:AppBar(
-  backgroundColor: Colors.transparent,
-  elevation: 0,
-  leading: IconButton(
-    icon: const Icon(Icons.arrow_back, color: Colors.white),
-    onPressed: () {
-      // ✅ balik ke HomePage & hapus stack sebelumnya
-      Navigator.pushNamedAndRemoveUntil(context, '/home', (route) => false);
-    },
-  ),
-  title: const Text("Detail", style: TextStyle(color: Colors.white)),
-  centerTitle: true,
-),
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () {
+            // ✅ Simpan data mobil yang benar ke history
+            BookingRepository.addHistory(
+              BookingHistory(
+                carName: carName,
+                brand: brand,
+                imagePath: imagePath,
+                startDate: startDate,
+                endDate: endDate,
+                paymentMethod: paymentMethod,
+              ),
+            );
 
+            Navigator.pushNamedAndRemoveUntil(
+              context,
+              '/home',
+              (route) => false,
+            );
+          },
+        ),
+        title: const Text("Detail", style: TextStyle(color: Colors.white)),
+        centerTitle: true,
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Container(
@@ -63,7 +88,6 @@ class BookingSuccessPage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              // ✅ Icon & Title
               const Icon(Icons.check_circle, color: Colors.green, size: 50),
               const SizedBox(height: 8),
               const Text(
@@ -74,81 +98,27 @@ class BookingSuccessPage extends StatelessWidget {
                   color: Colors.green,
                 ),
               ),
-              const SizedBox(height: 10),
-
-              // ✅ Kode Transaksi
-              const Text(
-                "dfk3ds7df-943jk33",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
-              ),
-              const SizedBox(height: 8),
-
-              // ✅ Barcode dummy
-              Container(
-                height: 60,
-                width: double.infinity,
-                color: Colors.black,
-                child: const Center(
-                  child: Text(
-                    "|||||||||||||||||||||",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                      letterSpacing: 2,
-                    ),
-                  ),
-                ),
-              ),
               const SizedBox(height: 20),
 
-              // ✅ Detail Pesanan
-              Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  "Detail Pesanan",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16,
-                    color: Colors.grey[900],
-                  ),
+              // ✅ Nama mobil yang benar
+              Text(
+                carName,
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
-              const SizedBox(height: 12),
 
-              // Tanggal + mobil
+              const SizedBox(height: 12),
               Row(
                 children: [
                   const Icon(Icons.date_range, color: Colors.blue),
                   const SizedBox(width: 8),
-                  Text(
-                    "${_formatDate(startDate)} - ${_formatDate(endDate)}",
-                    style: const TextStyle(fontSize: 14),
-                  ),
+                  Text("${_formatDate(startDate)} - ${_formatDate(endDate)}"),
                 ],
               ),
               const SizedBox(height: 16),
 
-              // Waktu Pengambilan
-              Row(
-                children: const [
-                  Icon(Icons.access_time, color: Colors.blue),
-                  SizedBox(width: 8),
-                  Expanded(child: Text("Waktu Pengambilan\nPukul 07:00 WIB")),
-                ],
-              ),
-              const SizedBox(height: 12),
-
-              // Waktu Pengembalian
-              Row(
-                children: const [
-                  Icon(Icons.access_time_filled, color: Colors.blue),
-                  SizedBox(width: 8),
-                  Expanded(child: Text("Waktu Pengembalian\nPukul 16:00 WIB")),
-                ],
-              ),
-              const SizedBox(height: 16),
-
-              // Metode Pembayaran
               Row(
                 children: [
                   const Icon(Icons.payment, color: Colors.blue),
@@ -156,22 +126,21 @@ class BookingSuccessPage extends StatelessWidget {
                   Text(paymentMethod),
                 ],
               ),
-
               const SizedBox(height: 20),
-              const Divider(),
-              const SizedBox(height: 8),
 
-              // ✅ Total Harga
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: const [
-                  Text(
+                children: [
+                  const Text(
                     "Total",
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                   ),
                   Text(
-                    "Rp 8.400.000",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                    price,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                    ),
                   ),
                 ],
               ),
