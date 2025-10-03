@@ -1,3 +1,5 @@
+import 'package:car_rent/screens/notification_page.dart';
+import 'package:car_rent/screens/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -169,18 +171,8 @@ class _HomePageState extends State<HomePage> {
     final List<Widget> pages = [
       _buildHomePage(),
       const HistoryPage(), // 🔥 Booking History asli
-      const Center(
-        child: Text(
-          "🔔 Notifications",
-          style: TextStyle(color: Colors.white, fontSize: 20),
-        ),
-      ),
-      const Center(
-        child: Text(
-          "👤 Profile Page",
-          style: TextStyle(color: Colors.white, fontSize: 20),
-        ),
-      ),
+      const NotificationPage(),
+       const ProfilePage(),
     ];
 
     return Scaffold(

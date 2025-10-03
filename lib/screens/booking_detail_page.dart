@@ -161,7 +161,7 @@ class _BookingDetailPageState extends State<BookingDetailPage> {
             const SizedBox(height: 8),
             DropdownButtonFormField<String>(
               dropdownColor: const Color(0xFF1E1E2C),
-              value: paymentMethod,
+              initialValue: paymentMethod,
               decoration: InputDecoration(
                 filled: true,
                 fillColor: const Color(0xFF1E1E2C),
