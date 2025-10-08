@@ -1,4 +1,3 @@
-import 'package:car_rent/widgets/custom_navbar.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'login_page.dart';
@@ -12,7 +11,6 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  int _selectedIndex = 3; // karena posisi profile di nav index ke-3
 
   final List<Map<String, String>> anggota = [
     {

@@ -1,5 +1,6 @@
 import 'package:car_rent/screens/login_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class OnboardingPage extends StatelessWidget {
@@ -13,7 +14,7 @@ class OnboardingPage extends StatelessWidget {
           // Background Image
           Positioned.fill(
             child: Image.asset(
-              'assets/images/car_interior.jpg', // ganti sesuai path gambar Anda
+              'assets/images/car_interior.jpg',
               fit: BoxFit.cover,
             ),
           ),
@@ -24,15 +25,15 @@ class OnboardingPage extends StatelessWidget {
           // Content
           SafeArea(
             child: Padding(
-              padding: const EdgeInsets.all(24.0),
+              padding: EdgeInsets.all(24.w),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const SizedBox(height: 40),
+                  SizedBox(height: 40.h),
 
                   // Title
                   Padding(
-                    padding: const EdgeInsets.only(left: 10.0),
+                    padding: EdgeInsets.only(left: 10.w),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -40,18 +41,18 @@ class OnboardingPage extends StatelessWidget {
                           "Goods",
                           style: GoogleFonts.inter(
                             textStyle: Theme.of(context).textTheme.displayLarge,
-                            fontSize: 47,
-                            color: Color(0xff6E667E),
+                            fontSize: 47.sp,
+                            color: const Color(0xff6E667E),
                             fontWeight: FontWeight.bold,
                             fontStyle: FontStyle.normal,
                           ),
                         ),
-                        SizedBox(height: 10),
+                        SizedBox(height: 10.h),
                         Text(
                           "Problem",
                           style: GoogleFonts.inter(
                             textStyle: Theme.of(context).textTheme.displayLarge,
-                            fontSize: 48,
+                            fontSize: 48.sp,
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
                             fontStyle: FontStyle.normal,
@@ -69,14 +70,14 @@ class OnboardingPage extends StatelessWidget {
                       "Gunakan dan sewa kendaraan\ndengan nyaman",
                       textAlign: TextAlign.center,
                       style: GoogleFonts.inter(
-                        fontSize: 15,
+                        fontSize: 15.sp,
                         color: Colors.white70,
                         fontWeight: FontWeight.w200,
                       ),
                     ),
                   ),
 
-                  const SizedBox(height: 50),
+                  SizedBox(height: 50.h),
 
                   // Gradient Button
                   Center(
@@ -88,10 +89,10 @@ class OnboardingPage extends StatelessWidget {
                         );
                       },
                       child: Container(
-                        width: 180,
-                        height: 45,
+                        width: 180.w,
+                        height: 45.h,
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
+                          borderRadius: BorderRadius.circular(15.r),
                           gradient: const LinearGradient(
                             colors: [
                               Color(0xff6E667E), // Ungu
@@ -102,10 +103,10 @@ class OnboardingPage extends StatelessWidget {
                           ),
                         ),
                         alignment: Alignment.center,
-                        child: const Text(
+                        child: Text(
                           "Mulai",
                           style: TextStyle(
-                            fontSize: 18,
+                            fontSize: 18.sp,
                             color: Colors.white,
                             fontWeight: FontWeight.w800,
                           ),
@@ -114,7 +115,7 @@ class OnboardingPage extends StatelessWidget {
                     ),
                   ),
 
-                  const SizedBox(height: 40),
+                  SizedBox(height: 40.h),
                 ],
               ),
             ),

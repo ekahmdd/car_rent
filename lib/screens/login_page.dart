@@ -40,7 +40,7 @@ class _LoginPageState extends State<LoginPage> {
       backgroundColor: Colors.transparent,
       body: Container(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(25),
+          borderRadius: BorderRadius.circular(0),
           gradient: const LinearGradient(
             colors: [Color(0xFF0E0E15), Color(0xFF3A3246)],
             begin: Alignment.topCenter,

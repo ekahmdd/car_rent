@@ -2,6 +2,7 @@ import 'package:car_rent/screens/notification_page.dart';
 import 'package:car_rent/screens/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../widgets/search_bar.dart';
 import '../widgets/greeting_text.dart';
@@ -9,7 +10,7 @@ import '../widgets/banner_car.dart';
 import '../widgets/brand_item.dart';
 import '../widgets/car_item.dart';
 import '../widgets/custom_navbar.dart';
-import 'history_page.dart'; // 🔥 import HistoryPage
+import 'history_page.dart';
 
 class Car {
   final String brand;
@@ -85,8 +86,15 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  /// 🔥 Halaman Home
+  /// 🔥 Halaman Home dengan Responsive Design
   Widget _buildHomePage() {
+    // MediaQuery untuk mendapatkan ukuran layar
+    final screenHeight = MediaQuery.of(context).size.height;
+    final screenWidth = MediaQuery.of(context).size.width;
+    final isTablet = screenWidth > 600;
+    final isLandscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
+
     return Stack(
       children: [
         Container(
@@ -100,64 +108,120 @@ class _HomePageState extends State<HomePage> {
         ),
         SafeArea(
           child: SingleChildScrollView(
-            padding: const EdgeInsets.all(16),
+            padding: EdgeInsets.symmetric(
+              horizontal: isTablet ? 32.w : 16.w,
+              vertical: 16.h,
+            ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(height: 15),
+                SizedBox(height: isLandscape ? 10.h : 15.h),
+
+                // Search Bar
                 SearchBarCustom(
                   controller: _searchController,
                   onChanged: _filterCars,
                 ),
-                const SizedBox(height: 40),
+
+                SizedBox(height: isLandscape ? 25.h : 40.h),
+
+                // Greeting Text
                 const GreetingText(),
-                const SizedBox(height: 40),
+
+                SizedBox(height: isLandscape ? 25.h : 40.h),
+
+                // Banner Car
                 const BannerCar(),
-                const SizedBox(height: 20),
+
+                SizedBox(height: 20.h),
+
+                // Brand Section
                 Text(
                   "Brand",
                   style: GoogleFonts.poppins(
-                    fontSize: 18,
+                    fontSize: isTablet ? 20.sp : 18.sp,
                     fontWeight: FontWeight.bold,
                     color: const Color(0xFFBFBFCA),
                   ),
                 ),
-                const SizedBox(height: 12),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: const [
-                    BrandItem(assetPath: "assets/images/honda.png"),
-                    BrandItem(assetPath: "assets/images/suzuki.png"),
-                    BrandItem(assetPath: "assets/images/mercy.png"),
-                    BrandItem(assetPath: "assets/images/toyota.png"),
-                  ],
-                ),
-                const SizedBox(height: 30),
+
+                SizedBox(height: 12.h),
+
+                // Brand Items - Responsive Grid
+                isTablet
+                    ? Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: const [
+                          BrandItem(assetPath: "assets/images/honda.png"),
+                          BrandItem(assetPath: "assets/images/suzuki.png"),
+                          BrandItem(assetPath: "assets/images/mercy.png"),
+                          BrandItem(assetPath: "assets/images/toyota.png"),
+                        ],
+                      )
+                    : Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: const [
+                          BrandItem(assetPath: "assets/images/honda.png"),
+                          BrandItem(assetPath: "assets/images/suzuki.png"),
+                          BrandItem(assetPath: "assets/images/mercy.png"),
+                          BrandItem(assetPath: "assets/images/toyota.png"),
+                        ],
+                      ),
+
+                SizedBox(height: isLandscape ? 20.h : 30.h),
+
+                // Available Cars Section
                 Text(
                   "Mobil yang tersedia",
                   style: GoogleFonts.poppins(
-                    fontSize: 16,
+                    fontSize: isTablet ? 18.sp : 16.sp,
                     fontWeight: FontWeight.bold,
                     color: const Color(0xFFBFBFCA),
                   ),
                 ),
-                const SizedBox(height: 12),
 
-                Column(
-                  children: filteredCars
-                      .map(
-                        (car) => Padding(
-                          padding: const EdgeInsets.only(bottom: 16),
-                          child: CarItem(
+                SizedBox(height: 12.h),
+
+                // Car List - Responsive Layout
+                isTablet
+                    ? GridView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: isLandscape ? 3 : 2,
+                          crossAxisSpacing: 16.w,
+                          mainAxisSpacing: 16.h,
+                          childAspectRatio: 0.75,
+                        ),
+                        itemCount: filteredCars.length,
+                        itemBuilder: (context, index) {
+                          final car = filteredCars[index];
+                          return CarItem(
                             name: car.name,
                             price: car.price,
                             assetPath: car.assetPath,
                             brand: car.brand,
-                          ),
-                        ),
+                          );
+                        },
                       )
-                      .toList(),
-                ),
+                    : Column(
+                        children: filteredCars
+                            .map(
+                              (car) => Padding(
+                                padding: EdgeInsets.only(bottom: 16.h),
+                                child: CarItem(
+                                  name: car.name,
+                                  price: car.price,
+                                  assetPath: car.assetPath,
+                                  brand: car.brand,
+                                ),
+                              ),
+                            )
+                            .toList(),
+                      ),
+
+                // Extra bottom padding
+                SizedBox(height: 20.h),
               ],
             ),
           ),
@@ -170,9 +234,9 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final List<Widget> pages = [
       _buildHomePage(),
-      const HistoryPage(), // 🔥 Booking History asli
+      const HistoryPage(),
       const NotificationPage(),
-       const ProfilePage(),
+      const ProfilePage(),
     ];
 
     return Scaffold(
